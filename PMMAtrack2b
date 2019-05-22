@@ -1,4 +1,4 @@
-function pos_lst=PMMAtrack2(filehead,digit,first,last,feature,threshold,lnoise,radiuscutL,radiuscutH,IcutL,IcutH,ecut,interactive,size,moviedt,ptime)
+function pos_lst=PMMAtrack2b(filehead,digit,first,last,feature,threshold,lnoise,radiuscutL,radiuscutH,IcutL,IcutH,ecut,interactive,size,moviedt,ptime)
 % Same with the Ftrack code, except flip image at beginning
 % 3dig mean 3 digits, frame number < 1000
 %   give sigma a value to use Gaussian filter to smooth image.
