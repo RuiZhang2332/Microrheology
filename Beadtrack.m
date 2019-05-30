@@ -11,7 +11,7 @@
 %
 %INPUT:
 %filehead: A string common to the image file names
-%          i.e. we assume that the filename is of the form ’framexxxx.tif’
+%          i.e. we assume that the filename is of the form â€™framexxxx.tifâ€™
 %
 %start: First frame to read
 % end: Final frame to read
@@ -96,10 +96,10 @@ for frame=first:last
     end          
 end
 toc
-%load handel
-%sound(y,Fs)
+load chirp
+sound(y,Fs)
 
-% It’s better to separate the particle tracking from the trajectory
+% Itâ€™s better to separate the particle tracking from the trajectory
 % analysis. Once the particles are located in each frame, we can re-run the
 %trajectory anslysis using different parameters.
 %
