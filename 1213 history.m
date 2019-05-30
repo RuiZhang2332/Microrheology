@@ -11,7 +11,7 @@ colormap('gray');imagesc(Ib2);
 max(max(Ib2))
 br = ans*0.4
 
-Beadtrack_movie([head, num2str(num),'/', num2str(num),'_T'],'%04u',11,901,49,br,5,0,47,40)
+Beadtrack_movie([head, num2str(num),'/', num2str(num),'_T'],'%04u',first,last,49,br,5,0,47,40)
 
 first = 11;
 last = 901;
