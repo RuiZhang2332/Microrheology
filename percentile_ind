@@ -1,0 +1,12 @@
+function out = percentile_ind(vec,small,large)
+% keep the percentile form small to large, and return the indices 
+% of the vector
+
+vec1 = sort(vec);
+n = length(vec1);
+ind1 = ceil(n*small);
+ind2 = floor(n*large);
+temp1 = vec1(ind1:ind2);
+out = ismember(vec,temp1);
+
+end
