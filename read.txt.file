@@ -7,6 +7,5 @@ for i = 1:1201
         k = k + 1; 
         PN5{k} = importdata([path, filename, num2str(i), '.txt']);
         sprintf('%d %d', k,i)
-        
     end
 end
