@@ -13,7 +13,7 @@ colormap('gray');imagesc(Ib2);
 max(max(Ib2))
 br = ans*0.4
 
-Beadtrack_movie([head, num2str(num),'\', num2str(num),'_T'],'%04u',first,last,49,br,5,0,47,40)
+Beadtrack_movie([head, num2str(num),'\', num2str(num),'_T'],'%04u',first,last,49,br,5,1,47,40,0.2)
 
 first = 11;
 last = 3000;
@@ -33,7 +33,7 @@ Btrack = track(Bpos,100,Bparam);
 Btraj = [Btrack(:,1) Btrack(:,2)];
 scatter(Btraj(:,1),Btraj(:,2),'.');
 xlim([0 1376]);ylim([0 1376]);
-print([head, num2str(num),' tracking\', num2str(num),' bead traj'],'-dpng');
+print([head2, num2str(num),' tracking\', num2str(num),' bead traj'],'-dpng');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 I1 = flipud(I1); I2 = flipud(I2);
@@ -52,9 +52,8 @@ xticks([500 1000 1500 2000 3000 5000 7000 8000 10000]);grid on;
 checkLH(Ib,cnt,3,0,10000)
 
 figure;histogram(cnt(:,5),300)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%   Mass cut:  R<30 R>55, I<1400  I>15000 e cut: 0.25
-%   lnoise = 3  th=6
 poslist=PMMAtrack3([head, num2str(num),'\', num2str(num),'_T'],'%04u',first,last,23,3,3,0.2,1,0.15,0.95,0.2,1,13,30);
 
 param = struct('mem',0,'good',20,'dim',2,'quiet',1);
@@ -86,7 +85,8 @@ save([head2, num2str(num),' tracking\',num2str(num),' workspace.mat']);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+path = 'E:\2019\0.2\P = 5\';
+filename = '0.3_5_96.txt';
 
 xdrift = fittedmodelx(t);
 ydrift = fittedmodely(t);
@@ -96,19 +96,17 @@ scatter(t,yd,'.b');
 plot(t,xdrift,'r',t,ydrift,'b','LineWidth',3);
 legend({'X-drift','Y-drift'},'Fontsize',14);
 title('X-drift & Y-drift','Fontsize',14);
-print('D:\Microrheology\2019\0.3\P = 9.5\36 tracking\36 drift','-dpng');
+print([path, num2str(num),' tracking\', num2str(num), ' drift'],'-dpng');
 
 x = Btraj(:,1)-xdrift; 
 y = Btraj(:,2)-ydrift; 
 x = x-x(1); y = y-y(1); 
 xo = Btraj(:,1)-Btraj(1,1); yo = Btraj(:,2)-Btraj(1,2);
-[v,x3,y3] = dedrift_velocityb(t,x,y,xo,yo,0.1);               % 1.9 - 1.8, the angle of the camera is 1.8
+[v,x3,y3] = dedrift_velocityb(t,x,y,xo,yo,-0.2);               % 1.9 - 1.8, the angle of the camera is 1.8
 a1=[t x3 y3];
 
 % Save 
-print('D:\Microrheology\2019\0.3\P = 9.5\36 tracking\36 U','-dpng');
-save('D:\Microrheology\2019\0.3\P = 9.5\36 tracking\36 workspace.mat');
-path = 'D:\Microrheology\2019\0.3\P = 0';
-filename = '0.3_9.5_36.txt';
-file = [path filesep filename];
+print([path, num2str(num),' tracking\', num2str(num), ' U'],'-dpng');
+save([path, num2str(num),' tracking\', num2str(num), ' workspace.mat']);
+file = [path,filename];
 save(file,'a1','-ascii');
